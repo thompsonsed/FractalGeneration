@@ -7,4 +7,4 @@ For examples and explanations check out *mandelbrot.ipynb*.
 
 To find additional fractals generated for http://thompsonsed.co.uk/programming-fractal-art-using-tensorflow, check out *pretty_fractals.ipynb*.
 
-Images are genered in the *images* folder, and the Julia set gif is stored in *gifs*.
+Images are generated in the *images* folder, and the Julia set gif is stored in *gifs*.
