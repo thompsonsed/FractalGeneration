@@ -50,10 +50,11 @@ class FractalGenerator:
                 return self.background
             v = np.log2(i + self.threshold - np.log2(np.log2(abs(z)))) / self.threshold
             if v < 1.0:
-                return v ** b1, v ** b2, v ** b3 # background
+                return v ** b1, v ** b2, v ** b3  # background
             else:
                 v = max(0, 2 - v)
                 return v ** r1, v ** r2, v ** r3  # main tones
+
         return colour
 
     def get_inner_colour(self, r1, r2, r3, b1, b2, b3):
@@ -85,10 +86,11 @@ class FractalGenerator:
                 return 0, 0, 0
             v = np.log2(i + self.threshold - np.log2(np.log2(abs(z)))) / self.threshold
             if v < 1.0:
-                return v ** b1, v ** b2, v ** b3 # coloured tones
+                return v ** b1, v ** b2, v ** b3  # coloured tones
             else:
                 v = max(0, 2 - v)
                 return v ** r1, v ** r2, v ** r3  # sepia tones
+
         return colour
 
     def set_grid(self, start_x, end_x, start_y, end_y, resolution_x, resolution_y, threshold):
@@ -150,10 +152,7 @@ class FractalGenerator:
             z_out = tf.where(tf.abs(z) < self.threshold, z ** 2 + c, z)
             not_diverged = tf.abs(z_out) < self.threshold
             # Create a group of tensorflow operations
-            step = tf.group(
-                z.assign(z_out),
-                n.assign_add(tf.cast(not_diverged, tf.float32))
-            )
+            step = tf.group(z.assign(z_out), n.assign_add(tf.cast(not_diverged, tf.float32)))
             # Run the operations for a set number of steps
             for i in range(iterations):
                 step.run()
@@ -182,10 +181,7 @@ class FractalGenerator:
 
             z_out = tf.where(tf.abs(z) < self.threshold, z ** 2 + c_val, z)
             not_diverged = tf.abs(z_out) < self.threshold
-            step = tf.group(
-                z.assign(z_out),
-                n.assign_add(tf.cast(not_diverged, tf.float32))
-            )
+            step = tf.group(z.assign(z_out), n.assign_add(tf.cast(not_diverged, tf.float32)))
 
             for i in range(iterations):
                 step.run()
